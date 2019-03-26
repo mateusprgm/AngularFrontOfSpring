@@ -16,4 +16,12 @@ export class OportunidadeService {
   adicionar(oportunidade: any) {
     return this.httpClient.post(this.apiUrl, oportunidade);
   }
+
+  deletar(oportunidade: any) {
+    return this.httpClient.delete(this.apiUrl+"/"+oportunidade.id, oportunidade);
+  }
+
+  atualizar(oportunidade: any) {
+    return this.httpClient.put(this.apiUrl+"/"+oportunidade.id, oportunidade);
+  }
 }

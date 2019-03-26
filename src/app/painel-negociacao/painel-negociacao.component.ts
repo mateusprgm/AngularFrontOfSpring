@@ -11,6 +11,7 @@ export class PainelNegociacaoComponent implements OnInit {
  
   oportunidade = {}
   oportunidades = []
+  oportunidadeUpdt = {}
   
   constructor(private oportunidadeService: OportunidadeService,
               private messageService: MessageService
@@ -26,6 +27,7 @@ export class PainelNegociacaoComponent implements OnInit {
     this.oportunidadeService.listar()
       .subscribe(resposta=>{
         this.oportunidades = <any> resposta;
+        this.oportunidadeUpdt = {};
       });
   }
 
@@ -41,4 +43,21 @@ export class PainelNegociacaoComponent implements OnInit {
       })
   }
 
+  deletar(oportunidade) {
+    this.oportunidadeService.deletar(oportunidade).subscribe(()=>{
+      this.consultar();
+    })
+  }
+
+  atualizar(oportunidade) {
+    if(oportunidade.id){
+      this.oportunidadeService.atualizar(oportunidade).subscribe(()=>{
+        this.consultar();
+      })
+    }
+  }
+
+  preparar(oportunidade) {
+    this.oportunidadeUpdt = oportunidade; 
+  }
 }
